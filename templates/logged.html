@@ -1,0 +1,7 @@
+{% extends "bootstrap.html" %}
+{% block content %}
+    <h1>Вы успешно вошли на сайт!</h1>
+    <h3>{{session['username']}}</h3>
+    <a href="/logout" role="button" class="btn btn-outline-primary">Выход</a>
+
+{% endblock %}
