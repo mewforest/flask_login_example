@@ -1,9 +1,17 @@
 {% extends "bootstrap.html" %}
 {% block content %}
-  <h1>Вход</h1>
-    <form action="/auth" method="post">
-        <input type="text" name="login" id="login_input" placeholder="Логин">
-        <input type="password" name="password"  id="password_input" placeholder="Пароль">
-        <input type="submit" class="btn btn-primary">
-    </form>
+    {% if mode == 'LOGIN' %}
+        <h1>Вход</h1>
+    {% else %}
+        <h1>Регистрация</h1>
+    {% endif %}
+        <form action="/auth" method="post">
+            <input type="text" name="login" id="login_input" placeholder="Логин">
+            <input type="password" name="password"  id="password_input" placeholder="Пароль">
+    {% if mode == 'LOGIN' %}
+            <input type="submit" class="btn btn-primary" value="Войти">
+    {% else %}
+            <input type="submit" class="btn btn-primary" value="Зарегистрироваться">
+    {% endif %}
+        </form>
 {% endblock %}
