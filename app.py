@@ -10,8 +10,16 @@ all_users = [admin]
 
 
 UPLOAD_FOLDER = 'uploads'
-ALLOWED_EXTENSION = 'jpg'
+ALLOWED_EXTENSIONS = ('txt', 'jpg', 'jpeg')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+
+def allowed_extensions(filename):
+    file_ext = filename[filename.rfind('.') + 1:]
+    if file_ext in ALLOWED_EXTENSIONS:
+        return True
+    else:
+        return False
 
 
 @app.route('/')
@@ -42,22 +50,23 @@ def register_page():
 
 @app.route('/go', methods=['POST'])
 def go():
-# check if the post request has the file part
         if 'file' not in request.files:
-            flash('No file part')
+            flash('Вы не загрузили файл!')
             return redirect(request.url)
         file = request.files['file']
-        # if user does not select file, browser also
-        # submit an empty part without filename
         if file.filename == '':
-            flash('No selected file')
+            flash('Вы не выбрали файл для загрузки!')
             return redirect(request.url)
-        if file and '.jpg' in file.filename:
+        if file and allowed_extensions(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return redirect(url_for('uploaded_file',
                                     filename=filename))
-   
+        else:
+              flash('Разрешенные типы файлов: txt, jpg')
+              return redirect(request.url)
+              
+                                  
  
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
