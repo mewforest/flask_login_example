@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -8,18 +8,18 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>{% block header %} Пример {% endblock %}</title>
   </head>
   <body>
   <div id="container">
   
   {% with messages = get_flashed_messages() %}
   {% if messages %}
-    <ul class=flashes>
+    <div id="alerts">
     {% for message in messages %}
-      <li>{{ message }}</li>
+      <div class="alert alert-danger">{{ message }}</div>
     {% endfor %}
-    </ul>
+    </div>
   {% endif %}
 {% endwith %}
   

@@ -4,7 +4,8 @@
         <h1>Отправка книги</h1>
 
 <form method="post" enctype="multipart/form-data">
-      <input type="file" name="file" class="btn btn-lg btn-primary">
-      <input type="submit" value="Upload" class="btn btn-outline-primary">
+<div class="form-group">
+<label class="btn btn-primary"> Загрузить (jpg, txt)<input type="file" id="file" name="file" hidden> </label></div>
+<input type="submit" value="Отправить" class="btn btn-outline-primary">
     </form>
 {% endblock %}
